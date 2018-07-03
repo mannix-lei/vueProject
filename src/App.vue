@@ -50,9 +50,9 @@
       }
     },
     created () {
-      if(this.$i18n.locale == 'en-us'){
-        this.vm.btn_language ='中文'
-      }else {
+      if (this.$i18n.locale == 'en-us') {
+        this.vm.btn_language = '中文'
+      } else {
         this.vm.btn_language = 'English'
       }
     },
@@ -61,12 +61,12 @@
         this.$router.push('/' + key)
       },
       changeLanguage () {
-        if(this.$i18n.locale == 'en-us'){
+        if (this.$i18n.locale == 'en-us') {
           this.$i18n.locale = 'zh-cn'
-          this.vm.btn_language ='中文'
-        }else {
-          this.$i18n.locale = 'en-us'
           this.vm.btn_language = 'English'
+        } else {
+          this.$i18n.locale = 'en-us'
+          this.vm.btn_language = '中文'
         }
       }
     }
@@ -115,6 +115,11 @@
   .el-input-group--append .el-input__inner, .el-input-group__prepend{
     height: 35px;
   }
+  .el-input--suffix .el-input__inner{
+    padding-right: 30px;
+    width: 105px;
+    height: 35px;
+  }
   .el-button{
    line-height: 0;
     height: 35px;
@@ -124,6 +129,10 @@
     background-color: #ffffff;
   }
   .appContent{
+    width: 70%;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
   .groupChat{
     padding-left: 20px;
