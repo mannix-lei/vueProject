@@ -117,7 +117,7 @@
   }
   .el-input--suffix .el-input__inner{
     padding-right: 30px;
-    width: 105px;
+    width: 135px;
     height: 35px;
   }
   .el-button{
