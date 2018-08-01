@@ -6,27 +6,49 @@
         <div class="logo"></div>
         <div class="tools">
           <div>
-            <el-input :placeholder="$t('tips.inputPlaceHolder')" v-model="vm.searchContent" class="input-with-select">
-              <el-button slot="append" icon="el-icon-search"></el-button>
-            </el-input>
+            <v-autocomplete
+              prepend-inner-icon="search"
+              :loading="loading"
+              :items="items"
+              :search-input.sync="search"
+              v-model="select"
+              cache-items
+              class="mx-3"
+              flat
+              return-object
+              :placeholder="$t('tips.inputPlaceHolder')"
+            ></v-autocomplete>
           </div>
           <div class="groupChat">{{$t("text.groupChat")}}</div>
           <div style="padding-left: 20px">
-            <el-button @click="changeLanguage">{{vm.btn_language}}</el-button>
+              <v-btn @click="changeLanguage">{{vm.btn_language}}</v-btn>
           </div>
         </div>
       </div>
       <div id="navMenu">
-        <el-menu :default-active="vm.activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="">{{$t("title.home")}}</el-menu-item>
-          <el-menu-item index="message">{{$t("title.message")}}</el-menu-item>
-          <el-menu-item index="fundFlow">{{$t("title.fundFlow")}}</el-menu-item>
-          <el-menu-item index="focus">{{$t("title.focus")}}</el-menu-item>
-          <el-menu-item index="quote">{{$t("title.quote")}}</el-menu-item>
-          <el-menu-item index="chain">{{$t("title.chain")}}</el-menu-item>
-          <el-menu-item index="community">{{$t("title.community")}}</el-menu-item>
-          <el-menu-item index="code">{{$t("title.code")}}</el-menu-item>
-        </el-menu>
+          <!--<v-tabs-->
+            <!--slot="extension"-->
+            <!--v-model="tab"-->
+            <!--color="white"-->
+            <!--align-with-title-->
+          <!--&gt;-->
+            <!--<v-tabs-slider color="yellow"></v-tabs-slider>-->
+
+            <!--<v-tab v-for="item in vm.tabs" :key="item">-->
+              <!--{{ item.value }}-->
+            <!--</v-tab>-->
+          <!--</v-tabs>-->
+
+        <!--<el-menu :default-active="vm.activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">-->
+          <!--<el-menu-item index="">{{$t("title.home")}}</el-menu-item>-->
+          <!--<el-menu-item index="message">{{$t("title.message")}}</el-menu-item>-->
+          <!--<el-menu-item index="fundFlow">{{$t("title.fundFlow")}}</el-menu-item>-->
+          <!--<el-menu-item index="focus">{{$t("title.focus")}}</el-menu-item>-->
+          <!--<el-menu-item index="quote">{{$t("title.quote")}}</el-menu-item>-->
+          <!--<el-menu-item index="chain">{{$t("title.chain")}}</el-menu-item>-->
+          <!--<el-menu-item index="community">{{$t("title.community")}}</el-menu-item>-->
+          <!--<el-menu-item index="message">{{$t("title.code")}}</el-menu-item>-->
+        <!--</el-menu>-->
       </div>
     </div>
     <div class="appContent">
@@ -37,16 +59,65 @@
 
 <script>
 // eslint-disable-next-line indent
+// eslint-disable-next-line
+/* eslint-disable */
 /* eslint-disable no-labels,indent,no-unused-expressions,eqeqeq */
+// import appTabs from './config/appTabs'
   export default {
   name: 'App',
     data: function () {
       return {
+        tab: null,
         vm: {
           activeIndex: '',
           searchContent: '',
-          btn_language: 'English'
-        }
+          btn_language: 'English',
+          // tabs: appTabs
+        },
+        loading: false,
+        items: [],
+        search: null,
+        select: null,
+        states: [
+          'Alabama',
+          'Alaska',
+          'American Samoa',
+          'Arizona',
+          'Arkansas',
+          'California',
+          'Colorado',
+          'Connecticut',
+          'Delaware',
+          'District of Columbia',
+          'Federated States of Micronesia',
+          'Florida',
+          'Georgia',
+          'Guam',
+          'Hawaii',
+          'Idaho',
+          'Illinois',
+          'Indiana',
+          'Iowa',
+          'Kansas',
+          'Kentucky',
+          'Louisiana',
+          'Maine',
+          'Marshall Islands',
+          'Maryland',
+          'Massachusetts',
+          'Michigan',
+          'Minnesota',
+          'Mississippi',
+          'Missouri',
+          'Montana',
+          'Nebraska',
+          'Nevada',
+          'New Hampshire',
+          'New Jersey',
+          'New Mexico',
+          'New York',
+          'North Carolina',
+        ]
       }
     },
     created () {
@@ -54,6 +125,11 @@
         this.vm.btn_language = '中文'
       } else {
         this.vm.btn_language = 'English'
+      }
+    },
+    watch: {
+      search (val) {
+        val && val !== this.select && this.querySelections(val)
       }
     },
     methods: {
@@ -68,6 +144,16 @@
           this.$i18n.locale = 'en-us'
           this.vm.btn_language = '中文'
         }
+      },
+      querySelections (v) {
+        this.loading = true
+        // Simulated ajax query
+        setTimeout(() => {
+          this.items = this.states.filter(e => {
+            return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+          })
+          this.loading = false
+        }, 500)
       }
     }
 }
@@ -83,7 +169,6 @@
   }
   #navMenu {
     width: 70%;
-    position: relative;
     margin: auto;
   }
   .logo{
@@ -102,8 +187,11 @@
     flex-wrap: nowrap;
     justify-content: space-evenly;
   }
+  /*.tools .v-input{*/
+    /*margin-top: 5px;*/
+  /*}*/
   .titleLine{
-    height: 45px;
+    height: 50px;
     justify-content: space-between;
     display: flex;
     flex-direction: row;

@@ -4,18 +4,19 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
 import VueI18n from 'vue-i18n'
-import 'element-ui/lib/theme-chalk/index.css'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 import LangENUS from './config/common/lang/en-us'
 import LangZHCN from './config/common/lang/zh-cn'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false
-Vue.use(ElementUI)
 Vue.use(VueI18n)
+Vue.use(Vuetify)
 
 const i18n = new VueI18n({
-  locale: 'zh-cn',
+  locale: (navigator.language || navigator.browserLanguage).toLowerCase(),
   messages: {
     'en-us': LangENUS,
     'zh-cn': LangZHCN
