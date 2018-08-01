@@ -26,29 +26,20 @@
         </div>
       </div>
       <div id="navMenu">
-          <!--<v-tabs-->
-            <!--slot="extension"-->
-            <!--v-model="tab"-->
-            <!--color="white"-->
-            <!--align-with-title-->
-          <!--&gt;-->
-            <!--<v-tabs-slider color="yellow"></v-tabs-slider>-->
-
-            <!--<v-tab v-for="item in vm.tabs" :key="item">-->
-              <!--{{ item.value }}-->
-            <!--</v-tab>-->
-          <!--</v-tabs>-->
-
-        <!--<el-menu :default-active="vm.activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">-->
-          <!--<el-menu-item index="">{{$t("title.home")}}</el-menu-item>-->
-          <!--<el-menu-item index="message">{{$t("title.message")}}</el-menu-item>-->
-          <!--<el-menu-item index="fundFlow">{{$t("title.fundFlow")}}</el-menu-item>-->
-          <!--<el-menu-item index="focus">{{$t("title.focus")}}</el-menu-item>-->
-          <!--<el-menu-item index="quote">{{$t("title.quote")}}</el-menu-item>-->
-          <!--<el-menu-item index="chain">{{$t("title.chain")}}</el-menu-item>-->
-          <!--<el-menu-item index="community">{{$t("title.community")}}</el-menu-item>-->
-          <!--<el-menu-item index="message">{{$t("title.code")}}</el-menu-item>-->
-        <!--</el-menu>-->
+        <v-tabs
+          v-model="vm.selectedTab"
+          color="white"
+          dark
+          slider-color="blue accent-2"
+        >
+          <v-tab
+            v-for="n in vm.tabs"
+            :key="n"
+            ripple
+          >
+            {{ n }}
+          </v-tab>
+        </v-tabs>
       </div>
     </div>
     <div class="appContent">
@@ -62,17 +53,16 @@
 // eslint-disable-next-line
 /* eslint-disable */
 /* eslint-disable no-labels,indent,no-unused-expressions,eqeqeq */
-// import appTabs from './config/appTabs'
   export default {
   name: 'App',
     data: function () {
       return {
-        tab: null,
+        selectedTab: null,
         vm: {
           activeIndex: '',
           searchContent: '',
           btn_language: 'English',
-          // tabs: appTabs
+          tabs: this.$t('title')
         },
         loading: false,
         items: [],
@@ -137,13 +127,9 @@
         this.$router.push('/' + key)
       },
       changeLanguage () {
-        if (this.$i18n.locale == 'en-us') {
-          this.$i18n.locale = 'zh-cn'
-          this.vm.btn_language = 'English'
-        } else {
-          this.$i18n.locale = 'en-us'
-          this.vm.btn_language = '中文'
-        }
+        this.$i18n.locale === 'zh-cn' ? this.$i18n.locale = 'en-us' : this.$i18n.locale = 'zh-cn'
+        this.vm.tabs = this.$t('title')
+        this.$i18n.locale === 'zh-cn' ? this.vm.btn_language = 'English' : this.vm.btn_language = '中文'
       },
       querySelections (v) {
         this.loading = true

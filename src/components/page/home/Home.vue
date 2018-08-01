@@ -2,24 +2,24 @@
   <div id="home">
     <div class="headLine">
       <span>{{$t('text.globalCurrency')}}</span>
-      <div class="dropDown">
-        <el-select v-model="vm.optionValue" :placeholder="$t('text.fastOrder')">
-          <el-option
-            v-for="item in vm.options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
+      <div style="width: 80%">
+        <v-container fluid grid-list-xl>
+          <v-layout>
+            <v-flex xs7 sm4 d-flex>
+              <v-select
+                :items="vm.options"
+                :placeholder="$t('text.fastOrder')"
+              ></v-select>
+            </v-flex>
+            <v-flex xs7 sm4 d-flex>
+              <v-select
+                :items="vm.optionsSpecial"
+                :placeholder="$t('text.specialOrder')"
+              ></v-select>
+            </v-flex>
 
-        <el-select v-model="vm.specialValue" :placeholder="$t('text.specialOrder')">
-          <el-option
-            v-for="item in vm.optionsSpecial"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
+          </v-layout>
+        </v-container>
       </div>
     </div>
 
@@ -38,42 +38,15 @@ export default {
   name: 'Home',
   data () {
     return {
+      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
       vm: {
         time: '',
         tips: '',
-        optionValue: '',
-        specialValue: '',
         options: [
-          {
-            value: '0',
-            label: this.$t('text.volume_24H')
-          },
-          {
-            value: '1',
-            label: this.$t('text.market')
-          }
+          this.$t('text.volume_24H'), this.$t('text.market')
         ],
         optionsSpecial: [
-          {
-            value: '0',
-            label: this.$t('text.new_code_7d')
-          },
-          {
-            value: '1',
-            label: this.$t('text.new_code_30d')
-          },
-          {
-            value: '2',
-            label: this.$t('text.new_user_7d')
-          },
-          {
-            value: '3',
-            label: this.$t('text.follower_total')
-          },
-          {
-            value: '4',
-            label: this.$t('text.contributors')
-          }
+          this.$t('text.new_code_7d'), this.$t('text.new_code_30d'), this.$t('text.new_user_7d'), this.$t('text.follower_total'), this.$t('text.contributors')
         ]
       }
     }
@@ -88,17 +61,22 @@ export default {
 
 <style scoped>
   .headLine{
-    margin-top: 20px;
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: row;
+    margin-top: 20px;
     width: 100%;
     line-height: 2;
   }
-  .dropDown{
-    margin-left: 10px;
+  .headLine .container{
+    padding: 0;
   }
-  .table{
-    margin-top: 20px;
-    width: 100%;
+  .headLine .container.grid-list-xl .layout:only-child{
+    margin: -35px 0px 0px 20px;
+  }
+  .headLine .v-menu>.v-menu__content{
+    top: 35px;
+    left: 0;
+    z-index: 8;
   }
 </style>

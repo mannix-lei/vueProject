@@ -4,7 +4,7 @@
       :dark=false
       :headers="headers"
       :items="desserts"
-      class="elevation-1"
+      class="elevation-3"
     >
       <template slot="headerCell" slot-scope="props">
         <v-tooltip bottom>
