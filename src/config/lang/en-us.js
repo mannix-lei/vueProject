@@ -1,13 +1,13 @@
 module.exports = {
   title: {
-    home: 'Home',
-    message: 'News',
-    fundFlow: 'FundFlow',
-    focus: 'Focus',
-    quote: 'Quote',
-    chain: 'Chain',
-    community: 'Community',
-    code: 'Code'
+    home: 'home',
+    message: 'news',
+    fundFlow: 'fundFlow',
+    focus: 'focus',
+    quote: 'quote',
+    chain: 'chain',
+    community: 'community',
+    code: 'code'
   },
   tips: {
     inputPlaceHolder: 'please input keywords'

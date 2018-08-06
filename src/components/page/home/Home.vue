@@ -4,20 +4,19 @@
       <span>{{$t('text.globalCurrency')}}</span>
       <div style="width: 80%">
         <v-container fluid grid-list-xl>
-          <v-layout>
-            <v-flex xs7 sm4 d-flex>
+          <v-layout wrap align-center>
+            <v-flex xs12 sm4 d-flex>
               <v-select
                 :items="vm.options"
                 :placeholder="$t('text.fastOrder')"
               ></v-select>
             </v-flex>
-            <v-flex xs7 sm4 d-flex>
+            <v-flex xs12 sm4 d-flex>
               <v-select
                 :items="vm.optionsSpecial"
                 :placeholder="$t('text.specialOrder')"
               ></v-select>
             </v-flex>
-
           </v-layout>
         </v-container>
       </div>
@@ -38,7 +37,6 @@ export default {
   name: 'Home',
   data () {
     return {
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
       vm: {
         time: '',
         tips: '',
@@ -52,7 +50,16 @@ export default {
     }
   },
   created () {
+    console.info(this.$i18n.locale)
   },
+  // beforeUpdate () {
+  //   this.vm.options = [
+  //     this.$t('text.volume_24H'), this.$t('text.market')
+  //   ]
+  //   this.vm.optionsSpecial = [
+  //     this.$t('text.new_code_7d'), this.$t('text.new_code_30d'), this.$t('text.new_user_7d'), this.$t('text.follower_total'), this.$t('text.contributors')
+  //   ]
+  // },
   methods: {
   }
 
@@ -78,5 +85,8 @@ export default {
     top: 35px;
     left: 0;
     z-index: 8;
+  }
+  .content{
+    width: 30%;
   }
 </style>

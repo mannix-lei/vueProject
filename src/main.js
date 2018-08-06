@@ -7,8 +7,8 @@ import router from './router'
 import VueI18n from 'vue-i18n'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import LangENUS from './config/common/lang/en-us'
-import LangZHCN from './config/common/lang/zh-cn'
+import LangENUS from './config/lang/en-us'
+import LangZHCN from './config/lang/zh-cn'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false

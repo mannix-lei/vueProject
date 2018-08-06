@@ -3,7 +3,7 @@
   <div id="app">
     <div class="appNav">
       <div class="titleLine">
-        <div class="logo"></div>
+        <div class="logo" @click="refreshPage"></div>
         <div class="tools">
           <div>
             <v-autocomplete
@@ -19,7 +19,7 @@
               :placeholder="$t('tips.inputPlaceHolder')"
             ></v-autocomplete>
           </div>
-          <div class="groupChat">{{$t("text.groupChat")}}</div>
+          <div class="groupChat">{{$t('text.groupChat')}}</div>
           <div style="padding-left: 20px">
               <v-btn @click="changeLanguage">{{vm.btn_language}}</v-btn>
           </div>
@@ -27,17 +27,16 @@
       </div>
       <div id="navMenu">
         <v-tabs
-          v-model="vm.selectedTab"
           color="white"
-          dark
+          grow
           slider-color="blue accent-2"
         >
           <v-tab
             v-for="n in vm.tabs"
-            :key="n"
-            ripple
+            :key="n.key"
+            @click="handleSelect(n.key)"
           >
-            {{ n }}
+            {{ n.value }}
           </v-tab>
         </v-tabs>
       </div>
@@ -54,15 +53,14 @@
 /* eslint-disable */
 /* eslint-disable no-labels,indent,no-unused-expressions,eqeqeq */
   export default {
-  name: 'App',
+    name: 'App',
     data: function () {
       return {
-        selectedTab: null,
         vm: {
           activeIndex: '',
           searchContent: '',
           btn_language: 'English',
-          tabs: this.$t('title')
+          tabs: []
         },
         loading: false,
         items: [],
@@ -111,11 +109,8 @@
       }
     },
     created () {
-      if (this.$i18n.locale == 'en-us') {
-        this.vm.btn_language = '中文'
-      } else {
-        this.vm.btn_language = 'English'
-      }
+      this.$i18n.locale==='zh-cn'? this.vm.btn_language = 'English': this.vm.btn_language = '中文'
+      this._initTabs()
     },
     watch: {
       search (val) {
@@ -123,12 +118,52 @@
       }
     },
     methods: {
-      handleSelect (key, keyPath) {
-        this.$router.push('/' + key)
+       _initTabs () {
+         this.vm.tabs = [
+           {key: 'home', value: this.$t('title.home')},
+           {key: 'message', value: this.$t('title.message')},
+           {key: 'fundFlow', value: this.$t('title.fundFlow')},
+           {key: 'focus', value: this.$t('title.focus')},
+           {key: 'quote', value: this.$t('title.quote')},
+           {key: 'chain', value: this.$t('title.chain')},
+           {key: 'community', value: this.$t('title.community')},
+           {key: 'code', value: this.$t('title.code')}
+         ]
+       },
+      refreshPage(){
+        this.$router.push('/')
+      },
+      handleSelect (e) {
+        switch (e) {
+          case  'home':
+            this.$router.push('/')
+            break
+          case 'message':
+            this.$router.push('/message')
+            break
+          case 'fundFlow':
+            this.$router.push('/fundflow')
+            break
+          case 'focus':
+            this.$router.push('/focus')
+            break
+          case 'quote':
+            this.$router.push('/quote')
+            break
+          case 'chain':
+            this.$router.push('/chain')
+            break
+          case 'community':
+            this.$router.push('/community')
+            break
+          case 'code':
+            this.$router.push('/code')
+            break
+        }
       },
       changeLanguage () {
         this.$i18n.locale === 'zh-cn' ? this.$i18n.locale = 'en-us' : this.$i18n.locale = 'zh-cn'
-        this.vm.tabs = this.$t('title')
+        this._initTabs()
         this.$i18n.locale === 'zh-cn' ? this.vm.btn_language = 'English' : this.vm.btn_language = '中文'
       },
       querySelections (v) {
@@ -158,6 +193,7 @@
     margin: auto;
   }
   .logo{
+    cursor: pointer;
     width: 200px;
     height: 50px ;
     background-image: url(./public/img/enLogo.png);
