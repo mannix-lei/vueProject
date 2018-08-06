@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 import VueI18n from 'vue-i18n'
 import Vuetify from 'vuetify'
+import store from './config/vuex/store'
 import 'vuetify/dist/vuetify.min.css'
 import LangENUS from './config/lang/en-us'
 import LangZHCN from './config/lang/zh-cn'
@@ -27,6 +28,7 @@ new Vue({
   el: '#app',
   router,
   i18n,
+  store: store,
   components: { App },
   template: '<App/>'
 })

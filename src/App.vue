@@ -58,7 +58,6 @@
       return {
         vm: {
           activeIndex: '',
-          searchContent: '',
           btn_language: 'English',
           tabs: []
         },

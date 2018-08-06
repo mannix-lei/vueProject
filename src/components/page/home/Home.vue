@@ -21,10 +21,13 @@
         </v-container>
       </div>
     </div>
-
-    <div class="table">
-      <Table></Table>
+    <div @click="addCount">
+      {{count}}
     </div>
+
+    <!--<div class="table">-->
+      <!--<Table></Table>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -50,17 +53,16 @@ export default {
     }
   },
   created () {
-    console.info(this.$i18n.locale)
   },
-  // beforeUpdate () {
-  //   this.vm.options = [
-  //     this.$t('text.volume_24H'), this.$t('text.market')
-  //   ]
-  //   this.vm.optionsSpecial = [
-  //     this.$t('text.new_code_7d'), this.$t('text.new_code_30d'), this.$t('text.new_user_7d'), this.$t('text.follower_total'), this.$t('text.contributors')
-  //   ]
-  // },
+  computed: {
+    count () {
+      return this.$store.state.count
+    }
+  },
   methods: {
+    addCount () {
+      this.$store.commit('increment')
+    }
   }
 
 }
