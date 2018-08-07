@@ -1,8 +1,7 @@
-import Store from './store'
-
+import {INCREMETN_REQUEST} from './mutationType'
 let mutations = {
-  increment () {
-    Store.state.count++
+  [INCREMETN_REQUEST] (state, payload) {
+    state.count += payload.mount
   }
 }
 

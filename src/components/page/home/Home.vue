@@ -21,20 +21,20 @@
         </v-container>
       </div>
     </div>
-    <div @click="addCount">
-      {{count}}
-    </div>
 
-    <!--<div class="table">-->
-      <!--<Table></Table>-->
-    <!--</div>-->
+    <div class="table">
+      <Table></Table>
+    </div>
   </div>
 </template>
 
 <script>
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars,import/no-duplicates */
 import Table from '../../public/Table'
 import Vue from 'vue'
+import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 Vue.component('Table', Table)
 export default {
   name: 'Home',
@@ -53,15 +53,24 @@ export default {
     }
   },
   created () {
+    this.$store.dispatch('increment')
   },
   computed: {
-    count () {
-      return this.$store.state.count
-    }
+    ...mapState([
+      'count'
+    ]),
+    ...mapGetters([
+      'doneTodosCount',
+      'getTodoById'
+    ])
   },
+
   methods: {
     addCount () {
-      this.$store.commit('increment')
+      this.$store.commit({
+        type: 'INCREMETN_REQUEST',
+        mount: 10
+      })
     }
   }
 
