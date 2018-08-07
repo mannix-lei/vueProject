@@ -65,46 +65,7 @@
         items: [],
         search: null,
         select: null,
-        states: [
-          'Alabama',
-          'Alaska',
-          'American Samoa',
-          'Arizona',
-          'Arkansas',
-          'California',
-          'Colorado',
-          'Connecticut',
-          'Delaware',
-          'District of Columbia',
-          'Federated States of Micronesia',
-          'Florida',
-          'Georgia',
-          'Guam',
-          'Hawaii',
-          'Idaho',
-          'Illinois',
-          'Indiana',
-          'Iowa',
-          'Kansas',
-          'Kentucky',
-          'Louisiana',
-          'Maine',
-          'Marshall Islands',
-          'Maryland',
-          'Massachusetts',
-          'Michigan',
-          'Minnesota',
-          'Mississippi',
-          'Missouri',
-          'Montana',
-          'Nebraska',
-          'Nevada',
-          'New Hampshire',
-          'New Jersey',
-          'New Mexico',
-          'New York',
-          'North Carolina',
-        ]
+        states: []
       }
     },
     created () {
@@ -236,12 +197,17 @@
   .appNav{
     width: 100%;
     background-color: #ffffff;
+    position: fixed;
+    top: 0px;
+    z-index: 1000;
   }
   .appContent{
     width: 70%;
     left: 0;
     right: 0;
     margin: auto;
+    position: relative;
+    top: 100px;
   }
   .groupChat{
     padding-left: 20px;

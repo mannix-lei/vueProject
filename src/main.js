@@ -10,6 +10,7 @@ import store from './config/vuex/store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueCookies from 'vue-cookies'
+import VueMoment from 'vue-moment'
 import 'vuetify/dist/vuetify.min.css'
 import LangENUS from './config/lang/en-us'
 import LangZHCN from './config/lang/zh-cn'
@@ -20,6 +21,7 @@ Vue.use(VueI18n)
 Vue.use(Vuetify)
 Vue.use(VueAxios, axios)
 Vue.use(VueCookies)
+Vue.use(VueMoment)
 
 const i18n = new VueI18n({
   locale: (navigator.language || navigator.browserLanguage).toLowerCase(),

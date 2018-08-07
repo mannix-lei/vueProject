@@ -23,7 +23,10 @@
     </div>
 
     <div class="table">
-      <Table></Table>
+      <Table
+        :requestUrl=vm.requestUrl
+        :headers=vm.headers>
+      </Table>
     </div>
   </div>
 </template>
@@ -41,6 +44,14 @@ export default {
   data () {
     return {
       vm: {
+        headers: [
+          {text: '币名称', align: 'center', value: 'name'},
+          { text: '市值', align: 'right', value: 'cmc_market_cap_usd' },
+          { text: '价格', align: 'right', value: 'cmc_price_usd' },
+          { text: '24h成交额', align: 'right', value: 'cmc_volume_usd' },
+          { text: '24h涨跌幅', align: 'right', value: 'cmc_change_ratio_24h_usd' }
+        ],
+        requestUrl: '/api/v3/home/rank_index',
         time: '',
         tips: '',
         options: [
@@ -53,7 +64,6 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('increment')
   },
   computed: {
     ...mapState([
